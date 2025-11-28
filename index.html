@@ -566,28 +566,6 @@
             transform: translateY(0);
         }
 
-        .install-btn {
-            margin-top: 20px;
-            padding: 12px 25px;
-            background: linear-gradient(45deg, #ff8c00, var(--accent));
-            border: none;
-            border-radius: 50px;
-            color: var(--dark);
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .install-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.6);
-        }
-
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -642,9 +620,6 @@
         <header>
             <h1><i class="fas fa-microchip"></i> Análisis BJT con Rb, Rc y Re</h1>
             <p class="subtitle">Herramienta profesional para análisis de transistores BJT con resistencias en base, colector y emisor. Visualiza la recta de carga y determina el estado del transistor.</p>
-            <button class="install-btn" id="installButton">
-                <i class="fas fa-download"></i> Instalar App
-            </button>
         </header>
         
         <div class="content">
@@ -786,7 +761,7 @@
         </div>
         
         <footer>
-            <p>Herramienta de Análisis de Transistores BJT &copy; 2023 | Tres resistencias</p>
+            <p>Herramienta de Análisis de Transistores BJT ; 2025 | Ángel Millán con DeepSeek</p>
             <div class="footer-links">
                 <a href="#" id="exportLink"><i class="fas fa-file-pdf"></i> Exportar a PDF</a>
                 <a href="#" id="shareBtn"><i class="fas fa-share-alt"></i> Compartir</a>
@@ -829,7 +804,6 @@
             const cancelExportBtn = document.getElementById('cancelExport');
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
-            const installButton = document.getElementById('installButton');
             const shareBtn = document.getElementById('shareBtn');
             const offlineInfo = document.getElementById('offlineInfo');
             const offlineBanner = document.getElementById('offlineBanner');
@@ -1238,43 +1212,6 @@
                     offlineBanner.classList.add('show');
                 }
             }
-            
-            // Manejar el botón de instalación
-            let deferredPrompt;
-            
-            window.addEventListener('beforeinstallprompt', (e) => {
-                // Prevenir que el navegador muestre el prompt automáticamente
-                e.preventDefault();
-                // Guardar el evento para que pueda ser activado más tarde
-                deferredPrompt = e;
-                // Mostrar el botón de instalación
-                installButton.style.display = 'block';
-            });
-            
-            installButton.addEventListener('click', () => {
-                if (deferredPrompt) {
-                    // Mostrar el prompt de instalación
-                    deferredPrompt.prompt();
-                    
-                    // Esperar a que el usuario responda al prompt
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('Usuario aceptó instalar la PWA');
-                            showToast('¡App instalada con éxito!');
-                            installButton.style.display = 'none';
-                        } else {
-                            console.log('Usuario rechazó instalar la PWA');
-                        }
-                        deferredPrompt = null;
-                    });
-                }
-            });
-            
-            // Verificar si la app ya está instalada
-            window.addEventListener('appinstalled', () => {
-                console.log('App instalada');
-                installButton.style.display = 'none';
-            });
             
             // Función para compartir la app
             shareBtn.addEventListener('click', (e) => {
