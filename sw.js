@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bjt-calculator-v2';
+const CACHE_NAME = 'bjt-calculator-v3';
 const urlsToCache = [
   './',
   './index.html',
